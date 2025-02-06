@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Підтвердження запису</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4ebe2;
+            text-align: center;
+            padding: 50px;
+        }
+        .message {
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            color: #5a3d2b;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="message">
+    <h2 id="statusMessage"></h2>
+    <a href="index.html">Повернутися на головну</a>
+</div>
+
+<script>
+    let params = new URLSearchParams(window.location.search);
+    let status = params.get("status");
+
+    let statusMessage = document.getElementById("statusMessage");
+
+    if (status === "success") {
+        statusMessage.textContent = "Ваш запис успішно створено!";
+        statusMessage.classList.add("success");
+    } else {
+        statusMessage.textContent = "Вибачте, всі місця зайняті.";
+        statusMessage.classList.add("error");
+    }
+</script>
+
+</body>
+</html>

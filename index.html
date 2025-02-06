@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Масажний Салон - Онлайн Запис</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4ebe2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            color: #5a3d2b;
+        }
+        label {
+            font-weight: bold;
+            color: #5a3d2b;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #5a3d2b;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #8b5e3b;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #5a3d2b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Онлайн запис на масаж</h2>
+    <form id="bookingForm">
+        <label>Ваше ім'я:</label>
+        <input type="text" id="name" required>
+        
+        <label>Номер телефону:</label>
+        <input type="tel" id="phone" required>
+        
+        <label>Оберіть дату:</label>
+        <input type="date" id="date" required>
+        
+        <label>Оберіть час:</label>
+        <select id="time" required>
+            <option value="10:00">10:00</option>
+            <option value="12:00">12:00</option>
+            <option value="14:00">14:00</option>
+            <option value="16:00">16:00</option>
+            <option value="18:00">18:00</option>
+        </select>
+        
+        <button type="submit">Записатися</button>
+    </form>
+    <div class="footer">
+        <p>© 2025 Масажний Салон</p>
+    </div>
+</div>
+
+<script>
+    document.getElementById("bookingForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        let name = document.getElementById("name").value;
+        let phone = document.getElementById("phone").value;
+        let date = document.getElementById("date").value;
+        let time = document.getElementById("time").value;
+
+        let availableSlots = ["10:00", "12:00", "14:00", "16:00", "18:00"]; 
+        let isAvailable = availableSlots.includes(time);
+        
+        if (isAvailable) {
+            window.location.href = "confirmation.html?status=success";
+        } else {
+            window.location.href = "confirmation.html?status=full";
+        }
+    });
+</script>
+
+</body>
+</html>

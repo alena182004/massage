@@ -67,7 +67,7 @@
         <label>Номер телефону:</label>
         <input type="tel" id="phone" required>
 
-        <label>Email:</label>
+        <label>Email:</label> 
         <input type="email" id="email" required>
         
         <label>Оберіть дату:</label>
@@ -97,9 +97,6 @@
 <script>
     document.getElementById("bookingForm").addEventListener("submit", function(event) {
         event.preventDefault();
-        
-        // Логування, щоб перевірити, чи працює подія submit
-        console.log("Форма відправлена!");
 
         let name = document.getElementById("name").value;
         let phone = document.getElementById("phone").value;
@@ -120,8 +117,6 @@
             "time": time
         };
 
-        console.log("Передані дані:", formData);  // Логування переданих даних
-
         fetch("https://script.google.com/macros/s/AKfycbzReUPZXufneHaTKRTJCsXCN_hQNftKIrgnQzpAt2jeeqBpov0N2M1t9_MgA6FRtXuv/exec", {
             method: "POST",
             headers: {
@@ -129,10 +124,8 @@
             },
             body: JSON.stringify(formData)
         })
-        .then(response => response.json()) // Отримуємо JSON-відповідь від сервера
+        .then(response => response.json()) 
         .then(data => {
-            console.log("Відповідь від сервера:", data);  // Логування відповіді від сервера
-
             if (data.status === "full") {
                 alert("⚠️ Цей час вже зайнятий! Оберіть інший.");
             } else if (data.status === "success") {

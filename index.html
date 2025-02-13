@@ -67,7 +67,7 @@
         <label>Номер телефону:</label>
         <input type="tel" id="phone" required>
 
-        <label>Електронна пошта:</label>
+        <label>Email:</label>  <!-- Тут змінено -->
         <input type="email" id="email" required>
         
         <label>Оберіть дату:</label>
@@ -105,14 +105,14 @@
         let time = document.getElementById("time").value;
 
         if (!email.includes("@") || !email.includes(".")) {
-            alert("❌ Введіть коректну електронну пошту!");
+            alert("❌ Введіть коректний email!");
             return;
         }
 
         let formData = {
             "name": name,
             "phone": phone,
-            "email": email,
+            "email": email,  // Тут теж змінено
             "date": date,
             "time": time
         };

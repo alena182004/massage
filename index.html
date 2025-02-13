@@ -1,99 +1,3 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Масажний Салон - Онлайн Запис</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4ebe2;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 500px;
-            margin: 50px auto;
-            background: white;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        h2 {
-            text-align: center;
-            color: #5a3d2b;
-        }
-        label {
-            font-weight: bold;
-            color: #5a3d2b;
-        }
-        input, select, button {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            background-color: #5a3d2b;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #8b5e3b;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #5a3d2b;
-        }
-        .message {
-            text-align: center;
-            font-weight: bold;
-            color: green;
-            display: none;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h2>Онлайн запис на масаж</h2>
-    
-    <form id="bookingForm">
-        <label>Ваше ім'я:</label>
-        <input type="text" id="name" required>
-        
-        <label>Номер телефону:</label>
-        <input type="tel" id="phone" required>
-
-        <label>Email:</label>  <!-- Тут змінено -->
-        <input type="email" id="email" required>
-        
-        <label>Оберіть дату:</label>
-        <input type="date" id="date" required>
-        
-        <label>Оберіть час:</label>
-        <select id="time" required>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-            <option value="14:00">14:00</option>
-            <option value="15:00">15:00</option>
-            <option value="16:00">16:00</option>
-            <option value="17:00">17:00</option>
-            <option value="18:00">18:00</option>
-        </select>
-        
-        <button type="submit">Записатися</button>
-    </form>
-    
-    <p class="message" id="successMessage">Ваш запис успішно відправлено!</p>
-
-    <div class="footer">
-        <p>© 2025 Масажний Салон</p>
-    </div>
-</div>
-
 <script>
     document.getElementById("bookingForm").addEventListener("submit", function(event) {
         event.preventDefault();
@@ -112,19 +16,19 @@
         let formData = {
             "name": name,
             "phone": phone,
-            "email": email,  // Тут теж змінено
+            "email": email, 
             "date": date,
             "time": time
         };
 
-        fetch("https://script.google.com/macros/s/AKfycby0lU_vRBEo0kEDqY-xZ7pqYTbv43sNcxlXUOkg7AgthCjN0s7At_3IJh8G3ek-1_I2/exec", {
+        fetch("https://script.google.com/macros/s/AKfycby0lU_vRBEo0kEDqY-xZ7pqYTbv43sNcxlXUOkg7AgthCjN0s7At_3IJh8G3ek-1_I2/exec", { 
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(formData)
         })
-        .then(response => response.json()) // Отримуємо JSON-відповідь від сервера
+        .then(response => response.json()) 
         .then(data => {
             if (data.status === "full") {
                 alert("⚠️ Цей час вже зайнятий! Оберіть інший.");
@@ -141,7 +45,3 @@
         });
     });
 </script>
-
-</body>
-</html>
-

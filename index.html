@@ -21,27 +21,35 @@
             "time": time
         };
 
-        fetch("https://script.google.com/macros/s/AKfycby0lU_vRBEo0kEDqY-xZ7pqYTbv43sNcxlXUOkg7AgthCjN0s7At_3IJh8G3ek-1_I2/exec", { 
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(response => response.json()) 
-        .then(data => {
-            if (data.status === "full") {
-                alert("⚠️ Цей час вже зайнятий! Оберіть інший.");
-            } else if (data.status === "success") {
-                document.getElementById("successMessage").style.display = "block";
-                document.getElementById("bookingForm").reset();
-            } else {
-                alert("❌ Сталася помилка! Спробуйте ще раз.");
-            }
-        })
-        .catch(error => {
-            console.error("Помилка при відправці форми!", error);
+      fetch("https://script.google.com/macros/s/AKfycby0lU_vRBEo0kEDqY-xZ7pqYTbv43sNcxlXUOkg7AgthCjN0s7At_3IJh8G3ek-1_I2/exec", { 
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(formData)
+})
+.then(response => response.text()) 
+.then(data => {
+    console.log("Відповідь сервера:", data);  // Додано лог
+    try {
+        let jsonData = JSON.parse(data);
+        if (jsonData.status === "full") {
+            alert("⚠️ Цей час вже зайнятий! Оберіть інший.");
+        } else if (jsonData.status === "success") {
+            document.getElementById("successMessage").style.display = "block";
+            document.getElementById("bookingForm").reset();
+        } else {
             alert("❌ Сталася помилка! Спробуйте ще раз.");
-        });
+        }
+    } catch (error) {
+        console.error("Помилка розбору відповіді:", error);
+        alert("❌ Помилка серверної відповіді!");
+    }
+})
+.catch(error => {
+    console.error("Помилка при відправці форми!", error);
+    alert("❌ Помилка підключення до сервера!");
+});
+
     });
 </script>

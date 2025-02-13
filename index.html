@@ -131,15 +131,7 @@
             } else if (data.status === "success") {
                 document.getElementById("successMessage").style.display = "block";
                 document.getElementById("bookingForm").reset();
-            } else {
-                alert("❌ Сталася помилка! Спробуйте ще раз.");
-            }
-        })
-        .catch(error => {
-            console.error("Помилка при відправці форми!", error);
-            alert("❌ Сталася помилка! Спробуйте ще раз.");
-        });
-    });
+           
 </script>
 
 </body>

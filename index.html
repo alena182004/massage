@@ -67,7 +67,7 @@
         <label>Номер телефону:</label>
         <input type="tel" id="phone" required>
 
-        <label>Email:</label>  <!-- Тут змінено -->
+        <label>Email:</label>
         <input type="email" id="email" required>
         
         <label>Оберіть дату:</label>
@@ -112,10 +112,13 @@
         let formData = {
             "name": name,
             "phone": phone,
-            "email": email,  // Тут теж змінено
+            "email": email,
             "date": date,
             "time": time
         };
+
+        // Логування перед відправкою
+        console.log("Form Data:", formData);
 
         fetch("https://script.google.com/macros/s/AKfycbzReUPZXufneHaTKRTJCsXCN_hQNftKIrgnQzpAt2jeeqBpov0N2M1t9_MgA6FRtXuv/exec", {
             method: "POST",
@@ -126,13 +129,21 @@
         })
         .then(response => response.json()) // Отримуємо JSON-відповідь від сервера
         .then(data => {
+            console.log("Server Response:", data);  // Логування відповіді від сервера
+
             if (data.status === "full") {
                 alert("⚠️ Цей час вже зайнятий! Оберіть інший.");
             } else if (data.status === "success") {
                 document.getElementById("successMessage").style.display = "block";
                 document.getElementById("bookingForm").reset();
-           
+            }
+        })
+        .catch(error => {
+            console.error("Помилка при запиті:", error);
+        });
+    });
 </script>
 
 </body>
 </html>
+

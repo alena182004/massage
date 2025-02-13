@@ -67,7 +67,7 @@
         <label>Номер телефону:</label>
         <input type="tel" id="phone" required>
 
-        <label>Email:</label> 
+        <label>Email:</label>  <!-- Тут змінено -->
         <input type="email" id="email" required>
         
         <label>Оберіть дату:</label>
@@ -112,7 +112,7 @@
         let formData = {
             "name": name,
             "phone": phone,
-            "email": email,
+            "email": email,  // Тут теж змінено
             "date": date,
             "time": time
         };
@@ -124,20 +124,24 @@
             },
             body: JSON.stringify(formData)
         })
-        .then(response => response.json()) 
+        .then(response => response.json()) // Отримуємо JSON-відповідь від сервера
         .then(data => {
             if (data.status === "full") {
                 alert("⚠️ Цей час вже зайнятий! Оберіть інший.");
             } else if (data.status === "success") {
                 document.getElementById("successMessage").style.display = "block";
                 document.getElementById("bookingForm").reset();
+            } else {
+                alert("❌ Сталася помилка! Спробуйте ще раз.");
             }
         })
         .catch(error => {
-            console.error("Помилка при запиті:", error);
+            console.error("Помилка при відправці форми!", error);
+            alert("❌ Сталася помилка! Спробуйте ще раз.");
         });
     });
 </script>
 
 </body>
 </html>
+

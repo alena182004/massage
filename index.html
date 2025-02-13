@@ -97,6 +97,9 @@
 <script>
     document.getElementById("bookingForm").addEventListener("submit", function(event) {
         event.preventDefault();
+        
+        // Логування, щоб перевірити, чи працює подія submit
+        console.log("Форма відправлена!");
 
         let name = document.getElementById("name").value;
         let phone = document.getElementById("phone").value;
@@ -117,8 +120,7 @@
             "time": time
         };
 
-        // Логування перед відправкою
-        console.log("Form Data:", formData);
+        console.log("Передані дані:", formData);  // Логування переданих даних
 
         fetch("https://script.google.com/macros/s/AKfycbzReUPZXufneHaTKRTJCsXCN_hQNftKIrgnQzpAt2jeeqBpov0N2M1t9_MgA6FRtXuv/exec", {
             method: "POST",
@@ -129,7 +131,7 @@
         })
         .then(response => response.json()) // Отримуємо JSON-відповідь від сервера
         .then(data => {
-            console.log("Server Response:", data);  // Логування відповіді від сервера
+            console.log("Відповідь від сервера:", data);  // Логування відповіді від сервера
 
             if (data.status === "full") {
                 alert("⚠️ Цей час вже зайнятий! Оберіть інший.");
@@ -146,4 +148,3 @@
 
 </body>
 </html>
-

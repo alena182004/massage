@@ -47,6 +47,12 @@
             margin-top: 20px;
             color: #5a3d2b;
         }
+        .message {
+            text-align: center;
+            font-weight: bold;
+            color: green;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -54,36 +60,68 @@
 <div class="container">
     <h2>Онлайн запис на масаж</h2>
     
-    <form action="https://formsubmit.co/gresisenaalena@gmail.com" method="POST">
-        <!-- Приховані поля для кращої роботи форми -->
-        <input type="hidden" name="_next" value="https://your-site.com/confirmation.html">  
-        <input type="hidden" name="_captcha" value="false">
-        
+    <form id="bookingForm">
         <label>Ваше ім'я:</label>
-        <input type="text" name="name" placeholder="Введіть ваше ім'я" required>
+        <input type="text" id="name" required>
         
         <label>Номер телефону:</label>
-        <input type="tel" name="phone" placeholder="Введіть ваш телефон" required>
+        <input type="tel" id="phone" required>
         
         <label>Оберіть дату:</label>
-        <input type="date" name="date" required>
+        <input type="date" id="date" required>
         
         <label>Оберіть час:</label>
-        <select name="time" required>
-            <option value="10:00">10:00</option>
+        <select id="time" required>
             <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
             <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
             <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
             <option value="18:00">18:00</option>
         </select>
         
         <button type="submit">Записатися</button>
     </form>
     
+    <p class="message" id="successMessage">Ваш запис успішно відправлено!</p>
+
     <div class="footer">
         <p>© 2025 Масажний Салон</p>
     </div>
 </div>
+
+<script>
+    document.getElementById("bookingForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        let name = document.getElementById("name").value;
+        let phone = document.getElementById("phone").value;
+        let date = document.getElementById("date").value;
+        let time = document.getElementById("time").value;
+
+        let formData = {
+            "name": name,
+            "phone": phone,
+            "date": date,
+            "time": time
+        };
+
+        fetch("https://script.google.com/macros/s/AKfycbzsd7ugn-ZnGfr65uKUfD32gtWKtaRqaNb6_zhvNmXOQxX1inA6owRmIG87MaYShXwp/exec", {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        }).then(response => {
+            document.getElementById("successMessage").style.display = "block";
+            document.getElementById("bookingForm").reset();
+        }).catch(error => {
+            console.error("Помилка при відправці форми!", error);
+        });
+    });
+</script>
 
 </body>
 </html>

@@ -53,18 +53,23 @@
 
 <div class="container">
     <h2>Онлайн запис на масаж</h2>
-    <form id="bookingForm">
+    
+    <form action="https://formsubmit.co/gresisenaalena@gmail.com" method="POST">
+        <!-- Приховані поля для кращої роботи форми -->
+        <input type="hidden" name="_next" value="https://your-site.com/confirmation.html">  
+        <input type="hidden" name="_captcha" value="false">
+        
         <label>Ваше ім'я:</label>
-        <input type="text" id="name" required>
+        <input type="text" name="name" placeholder="Введіть ваше ім'я" required>
         
         <label>Номер телефону:</label>
-        <input type="tel" id="phone" required>
+        <input type="tel" name="phone" placeholder="Введіть ваш телефон" required>
         
         <label>Оберіть дату:</label>
-        <input type="date" id="date" required>
+        <input type="date" name="date" required>
         
         <label>Оберіть час:</label>
-        <select id="time" required>
+        <select name="time" required>
             <option value="10:00">10:00</option>
             <option value="12:00">12:00</option>
             <option value="14:00">14:00</option>
@@ -74,30 +79,11 @@
         
         <button type="submit">Записатися</button>
     </form>
+    
     <div class="footer">
         <p>© 2025 Масажний Салон</p>
     </div>
 </div>
-
-<script>
-    document.getElementById("bookingForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        
-        let name = document.getElementById("name").value;
-        let phone = document.getElementById("phone").value;
-        let date = document.getElementById("date").value;
-        let time = document.getElementById("time").value;
-
-        let availableSlots = ["10:00", "12:00", "14:00", "16:00", "18:00"]; 
-        let isAvailable = availableSlots.includes(time);
-        
-        if (isAvailable) {
-            window.location.href = "confirmation.html?status=success";
-        } else {
-            window.location.href = "confirmation.html?status=full";
-        }
-    });
-</script>
 
 </body>
 </html>

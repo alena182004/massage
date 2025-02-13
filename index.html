@@ -66,6 +66,9 @@
         
         <label>Номер телефону:</label>
         <input type="tel" id="phone" required>
+
+        <label>Електронна пошта:</label>
+        <input type="email" id="email" required>
         
         <label>Оберіть дату:</label>
         <input type="date" id="date" required>
@@ -92,18 +95,24 @@
 </div>
 
 <script>
-  <script>
     document.getElementById("bookingForm").addEventListener("submit", function(event) {
         event.preventDefault();
 
         let name = document.getElementById("name").value;
         let phone = document.getElementById("phone").value;
+        let email = document.getElementById("email").value;
         let date = document.getElementById("date").value;
         let time = document.getElementById("time").value;
+
+        if (!email.includes("@") || !email.includes(".")) {
+            alert("❌ Введіть коректну електронну пошту!");
+            return;
+        }
 
         let formData = {
             "name": name,
             "phone": phone,
+            "email": email,
             "date": date,
             "time": time
         };
@@ -131,8 +140,6 @@
             alert("❌ Сталася помилка! Спробуйте ще раз.");
         });
     });
-</script>
-
 </script>
 
 </body>
